@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Haven - Premium Clothing & Accessories</title>
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --success-color: #27ae60;
+            --border-radius: 4px;
+            --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles (Consistent across all pages) */
+        header {
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-links a {
+            color: white;
+            transition: var(--transition);
+        }
+
+        .top-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .main-header {
+            padding: 15px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        /* Navigation with Dropdown */
+        .nav-container {
+            position: relative;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            padding: 10px 15px;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dropdown-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background-color: #f5f5f5;
+            color: var(--secondary-color);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-icons button {
+            font-size: 1.2rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .header-icons button:hover {
+            color: var(--secondary-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            padding: 40px 0;
+            min-height: calc(100vh - 300px);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Product Catalog Page */
+        .catalog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumbs {
+            display: flex;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .breadcrumbs a {
+            transition: var(--transition);
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary-color);
+        }
+
+        .products-filter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .filter-group select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: var(--border-radius);
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .product-badge.sale {
+            background-color: var(--secondary-color);
+        }
+
+        .product-badge.new {
+            background-color: var(--success-color);
+        }
+
+        .product-img {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+
+        .product-actions {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 10px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-actions {
+            opacity: 1;
+        }
+
+        .product-actions button {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .product-actions button:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-category {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .current-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .old-price {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--dark-color);
+        }
+
+        /* Shopping Cart Page */
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .cart-table th {
+            text-align: left;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+        }
+
+        .cart-item-details h4 {
+            margin-bottom: 5px;
+        }
+
+        .cart-item-details p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            width: fit-content;
+        }
+
+        .quantity-selector button {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-selector span {
+            width: 40px;
+            text-align: center;
+        }
+
+        .remove-item {
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            color: var(--secondary-color);
+        }
+
+        .cart-summary {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            max-width: 400px;
+            margin-left: auto;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .summary-row.total {
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--text-light);
+        }
+
+        .btn-secondary:hover {
+            background-color: #6c757d;
+        }
+
+        /* Login Page */
+        .auth-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .auth-tab.active {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .auth-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            margin-top: 10px;
+            transition: var(--transition);
+        }
+
+        .auth-form button:hover {
+            background-color: #c0392b;
+        }
+
+        .auth-divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .auth-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #ddd;
+            z-index: -1;
+        }
+
+        .auth-divider span {
+            background-color: white;
+            padding: 0 15px;
+        }
+
+        .social-auth {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .social-auth button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .social-auth button:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Footer (Consistent across all pages) */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+
+        .footer-column ul li a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-links {
+                display: none;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                z-index: 99;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                display: none;
+            }
+            
+            .nav-item:hover .dropdown-menu {
+                display: block;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .header-icons {
+                gap: 15px;
+            }
+            
+            .cart-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-container {
+                padding: 20px;
+            }
+            
+            .products-filter {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .cart-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar (Consistent across all pages) -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <p>Free shipping on orders over $50</p>
+            <div class="top-links">
+                <a href="#">Store Locator</a>
+                <a href="#">Customer Service</a>
+                <a href="#">Track Order</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header with Navigation (Consistent across all pages) -->
+    <header class="main-header">
+        <div class="container header-content">
+            <button class="mobile-menu-btn">☰</button>
+            <a href="index.html" class="logo">Fashion<span>Haven</span></a>
+            
+            <nav class="nav-container">
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Women</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="catalog.html?category=women_dresses" class="dropdown-item">Dresses</a></li>
+                            <li><a href="catalog.html?category=women_tops" class="dropdown-item">Tops</a></li>
+                            <li><a href="catalog.html?category=women_pants" class="dropdown-item">Pants & Jeans</a></li>
+                            <li><a href="catalog.html?category=women_jackets" class="dropdown-item">Jackets & Coats</a></li>
+                            <li><a href="catalog.html?category=women_shoes" class="dropdown-item">Shoes</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Men</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="catalog.html?category=men_shirts" class="dropdown-item">Shirts</a></li>
+                            <li><a href="catalog.html?category=men_pants" class="dropdown-item">Pants & Jeans</a></li>
+                            <li><a href="catalog.html?category=men_jackets" class="dropdown-item">Jackets</a></li>
+                            <li><a href="catalog.html?category=men_shoes" class="dropdown-item">Shoes</a></li>
+                            <li><a href="catalog.html?category=men_accessories" class="dropdown-item">Accessories</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Kids</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="catalog.html?category=kids_boys" class="dropdown-item">Boys</a></li>
+                            <li><a href="catalog.html?category=kids_girls" class="dropdown-item">Girls</a></li>
+                            <li><a href="catalog.html?category=kids_baby" class="dropdown-item">Baby</a></li>
+                            <li><a href="catalog.html?category=kids_shoes" class="dropdown-item">Shoes</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Accessories</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="catalog.html?category=accessories_bags" class="dropdown-item">Bags</a></li>
+                            <li><a href="catalog.html?category=accessories_jewelry" class="dropdown-item">Jewelry</a></li>
+                            <li><a href="catalog.html?category=accessories_watches" class="dropdown-item">Watches</a></li>
+                            <li><a href="catalog.html?category=accessories_sunglasses" class="dropdown-item">Sunglasses</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Sale</a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="header-icons">
+                <button class="search-btn">🔍</button>
+                <a href="login.html" class="user-btn">👤</a>
+                <a href="cart.html" class="cart-btn">🛒 <span class="cart-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area (Changes based on page) -->
+    <main class="main-content">
+        <!-- Product Catalog Page -->
+        <div id="catalog-page" class="container">
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> / <span>Women's Dresses</span>
+            </div>
+            
+            <h1 class="page-title">Women's Dresses</h1>
+            
+            <div class="products-filter">
+                <div class="filter-group">
+                    <span>Filter by:</span>
+                    <select>
+                        <option>Size</option>
+                        <option>XS</option>
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+                    </select>
+                    <select>
+                        <option>Color</option>
+                        <option>Black</option>
+                        <option>White</option>
+                        <option>Red</option>
+                        <option>Blue</option>
+                        <option>Green</option>
+                    </select>
+                    <select>
+                        <option>Price</option>
+                        <option>Under $50</option>
+                        <option>$50 - $100</option>
+                        <option>$100 - $200</option>
+                        <option>Over $200</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <span>Sort by:</span>
+                    <select>
+                        <option>Featured</option>
+                        <option>Newest</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Top Rated</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-badge new">New</div>
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Summer Floral Dress">
+                        <div class="product-actions">
+                            <button title="Quick View">👁️</button>
+                            <button title="Add to Wishlist">❤️</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Dresses</span>
+                        <h3 class="product-title">Summer Floral Dress</h3>
+                        <div class="product-price">
+                            <span class="current-price">$59.99</span>
+                            <span class="old-price">$79.99</span>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-badge sale">Sale</div>
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Elegant Evening Dress">
+                        <div class="product-actions">
+                            <button title="Quick View">👁️</button>
+                            <button title="Add to Wishlist">❤️</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Dresses</span>
+                        <h3 class="product-title">Elegant Evening Dress</h3>
+                        <div class="product-price">
+                            <span class="current-price">$89.99</span>
+                            <span class="old-price">$129.99</span>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Casual Cotton Dress">
+                        <div class="product-actions">
+                            <button title="Quick View">👁️</button>
+                            <button title="Add to Wishlist">❤️</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Dresses</span>
+                        <h3 class="product-title">Casual Cotton Dress</h3>
+                        <div class="product-price">
+                            <span class="current-price">$39.99</span>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Wrap Midi Dress">
+                        <div class="product-actions">
+                            <button title="Quick View">👁️</button>
+                            <button title="Add to Wishlist">❤️</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Dresses</span>
+                        <h3 class="product-title">Wrap Midi Dress</h3>
+                        <div class="product-price">
+                            <span class="current-price">$49.99</span>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-badge new">New</div>
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Off-Shoulder Party Dress">
+                        <div class="product-actions">
+                            <button title="Quick View">👁️</button>
+                            <button title="Add to Wishlist">❤️</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Dresses</span>
+                        <h3 class="product-title">Off-Shoulder Party Dress</h3>
+                        <div class="product-price">
+                            <span class="current-price">$69.99</span>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-badge sale">Sale</div>
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1595341595379-cf1cd0fb7fb3?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Maxi Floral Dress">
+                        <div class="product-actions">
+                            <button title="Quick View">👁️</button>
+                            <button title="Add to Wishlist">❤️</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Dresses</span>
+                        <h3 class="product-title">Maxi Floral Dress</h3>
+                        <div class="product-price">
+                            <span class="current-price">$54.99</span>
+                            <span class="old-price">$79.99</span>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Denim Shirt Dress">
+                        <div class="product-actions">
+                            <button title="Quick View">👁️</button>
+                            <button title="Add to Wishlist">❤️</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Dresses</span>
+                        <h3 class="product-title">Denim Shirt Dress</h3>
+                        <div class="product-price">
+                            <span class="current-price">$45.99</span>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Bodycon Mini Dress">
+                        <div class="product-actions">
+                            <button title="Quick View">👁️</button>
+                            <button title="Add to Wishlist">❤️</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Dresses</span>
+                        <h3 class="product-title">Bodycon Mini Dress</h3>
+                        <div class="product-price">
+                            <span class="current-price">$39.99</span>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>/* Add to existing CSS */
+.cart-item .quantity-selector {
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    display: inline-flex;
+    align-items: center;
+}
+
+.cart-item .quantity-selector button {
+    width: 30px;
+    height: 30px;
+    background: #f8f9fa;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.cart-item .quantity-selector button:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.cart-item .quantity-selector span {
+    width: 40px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.cart-summary {
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    max-width: 400px;
+    margin-left: auto;
+    margin-top: 30px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.summary-row.total {
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+    border-bottom: none;
+    margin-top: 10px;
+}
+
+.cart-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.cart-actions .btn {
+    flex: 1;
+    text-align: center;
+}
+
+.empty-cart-message {
+    text-align: center;
+    padding: 50px 0;
+    display: none;
+}
+
+.empty-cart-message.active {
+    display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cart-summary {
+        max-width: 100%;
+    }
+    
+    .cart-actions {
+        flex-direction: column;
+    }
+}</style>
+        <!-- Shopping Cart Page (Hidden by default) -->
+        <!-- Shopping Cart Page (Hidden by default) -->
+<div id="cart-page" class="container" style="display: none;">
+    <div class="breadcrumbs">
+        <a href="index.html">Home</a> / <span>Shopping Cart</span>
+    </div>
+    
+    <h1 class="page-title">Your Shopping Cart</h1>
+    
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="cart-item">
+                <td>
+                    <div class="cart-item-details">
+                        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Summer Floral Dress" class="cart-item-img">
+                        <h4>Summer Floral Dress</h4>
+                        <p>Size: M | Color: Blue</p>
+                    </div>
+                </td>
+                <td class="cart-item-price">$59.99</td>
+                <td>
+                    <div class="quantity-selector">
+                        <button class="qty-minus">-</button>
+                        <span class="qty-value">1</span>
+                        <button class="qty-plus">+</button>
+                    </div>
+                </td>
+                <td class="item-total">$59.99</td>
+                <td><button class="remove-item">✕</button></td>
+            </tr>
+            <tr class="cart-item">
+                <td>
+                    <div class="cart-item-details">
+                        <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Elegant Evening Dress" class="cart-item-img">
+                        <h4>Elegant Evening Dress</h4>
+                        <p>Size: S | Color: Black</p>
+                    </div>
+                </td>
+                <td class="cart-item-price">$89.99</td>
+                <td>
+                    <div class="quantity-selector">
+                        <button class="qty-minus">-</button>
+                        <span class="qty-value">2</span>
+                        <button class="qty-plus">+</button>
+                    </div>
+                </td>
+                <td class="item-total">$179.98</td>
+                <td><button class="remove-item">✕</button></td>
+            </tr>
+            <!-- Additional cart items can be added dynamically -->
+        </tbody>
+    </table>
+    
+    <div class="cart-summary">
+        <div class="summary-row">
+            <span>Subtotal:</span>
+            <span class="subtotal">$239.97</span>
+        </div>
+        <div class="summary-row">
+            <span>Shipping:</span>
+            <span class="shipping">$9.99</span>
+        </div>
+        <div class="summary-row">
+            <span>Tax:</span>
+            <span class="tax">$19.20</span>
+        </div>
+        <div class="summary-row total">
+            <span>Total:</span>
+            <span class="order-total">$269.16</span>
+        </div>
+        
+        <div class="cart-actions">
+            <a href="catalog.html" class="btn btn-outline">Continue Shopping</a>
+            <a href="checkout.html" class="btn">Proceed to Checkout</a>
+        </div>
+    </div>
+</div>
+        
+     <!-- Add before closing </main> tag -->
+<!-- Hero Banner Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Summer Collection 2023</h1>
+            <p>Up to 50% off on new arrivals</p>
+            <a href="#" class="btn">Shop Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Categories -->
+<section class="categories">
+    <div class="container">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="categories-grid">
+            <a href="catalog.html?category=women" class="category-card">
+                <div class="category-img">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Women's Fashion">
+                </div>
+                <h3>Women</h3>
+            </a>
+            <a href="catalog.html?category=men" class="category-card">
+                <div class="category-img">
+                    <img src="https://images.unsplash.com/photo-1505022610485-0249ba5b3675?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Men's Fashion">
+                </div>
+                <h3>Men</h3>
+            </a>
+            <a href="catalog.html?category=accessories" class="category-card">
+                <div class="category-img">
+                    <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Accessories">
+                </div>
+                <h3>Accessories</h3>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products -->
+<section class="featured-products">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Best Sellers</h2>
+            <a href="catalog.html" class="view-all">View All</a>
+        </div>
+        <div class="products-grid">
+            <!-- Product cards will be dynamically inserted here -->
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+    <div class="container">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="rating">★★★★★</div>
+                <p>"The quality exceeded my expectations! Fast shipping and perfect fit."</p>
+                <div class="customer">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson">
+                    <span>Sarah Johnson</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="rating">★★★★☆</div>
+                <p>"Great customer service helped me find exactly what I was looking for."</p>
+                <div class="customer">
+                    <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Michael Chen">
+                    <span>Michael Chen</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter">
+    <div class="container">
+        <div class="newsletter-content">
+            <h2>Join Our Newsletter</h2>
+            <p>Subscribe for 15% off your first order and exclusive promotions</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</section>
